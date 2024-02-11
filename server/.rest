@@ -1,0 +1,15 @@
+###
+GET http://localhost:5050/api/v1/users/all 
+Accept: application/json
+###
+GET http://localhost:8085/users 
+Accept: application/json
+
+### 
+POST http://localhost:5050/api/v1/users/register
+Content-Type: application/json
+
+{
+"username" : "JackD27", "email" : "jdaviskid27@yahoo.com", "password" : "idk123"
+}
+
