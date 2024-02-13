@@ -1,8 +1,10 @@
 const z = require('zod');
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const personValidation = z.object({
-    firstName: z.string().required({message: 'First Name is required.'}),
-    lastName: z.string().required({message: 'Last Name is required.'}),
+const ownerValidation = z.object({
+    firstName: z.string(),
+    lastName: z.string(),
     email: z.string().email({message: 'Wrong email format.'}).optional(),
     phoneNumber: z.string().optional(),
     address: z.object({
@@ -11,8 +13,8 @@ const personValidation = z.object({
         state: z.string().optional(),
         zip: z.string().optional(),
     }).optional(),
-    pets: z.array(z.instanceof(ObjectId)).optional(),
+    pets: z.array(z.string()).optional(),
 });
 
-module.exports = personValidation;
+module.exports = ownerValidation;
 

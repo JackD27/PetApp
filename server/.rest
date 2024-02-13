@@ -1,15 +1,50 @@
-###
-GET http://localhost:5050/api/v1/users/all 
-Accept: application/json
-###
-GET http://localhost:8085/users 
+### User API
+GET http://localhost:5050/api/v1/users/get-users
 Accept: application/json
 
 ### 
-POST http://localhost:5050/api/v1/users/register
+POST http://localhost:5050/api/v1/users/signup
 Content-Type: application/json
 
 {
 "username" : "Tyjack", "email" : "jdaviskid44@yahoo.com", "password" : "idk123"
 }
+
+### Owner API
+GET http://localhost:5050/api/v1/owners/get-owners 
+Accept: application/json
+
+### 
+GET http://localhost:5050/api/v1/owners/get-owner/65cbdcc4434a3eac3c905468
+Accept: application/json
+
+
+### 
+POST http://localhost:5050/api/v1/owners/create
+Content-Type: application/json
+
+{
+"firstName" : "yooo", "lastName" : "Dgsgsave", "email" : "jdaviskid27@yahoo.com", "phoneNumber" : "123-456-7890"
+}
+
+###
+DELETE http://localhost:5050/api/v1/owners/delete/65cbecaad7d9185978501d0e
+Accept: application/json
+
+### Pets API
+GET http://localhost:5050/api/v1/pets/get-pets
+Accept: application/json
+
+### 
+POST http://localhost:5050/api/v1/pets/create
+Content-Type: application/json
+
+{
+"owner" : "65cbec61d7d9185978501cff", "name" : "Chua", "breed" : "poodle", "color" : "white"
+}
+
+###
+DELETE http://localhost:5050/api/v1/pets/delete-all
+Accept: application/json
+
 
