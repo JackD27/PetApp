@@ -7,9 +7,25 @@ const personSchema = Schema({
     lastName: String,
     email: String,
     phoneNumber: String,
-    address: String,
+    address: {
+        street: String,
+        city: String,
+        state: String,
+        zip: String,
+    },
     pets: [{ type: Schema.ObjectId, ref: 'pets' }],
-    createdAt: { type: Date, default: Date.now},
+    updatedAt : { type: Date, default: Date.now},
+    createdAt: { type: Date, default: Date.now, immutable: true}
+});
+
+personSchema.pre('remove', function(next) {
+    this.model('pets').deleteMany({ owner: this._id });
+    next();
+});
+
+personSchema.pre('save', function(next) {
+    this.updatedAt = new Date();
+    next();
 });
 
 module.exports = mongoose.model('people', personSchema)

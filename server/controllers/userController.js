@@ -1,11 +1,11 @@
 const userModel  = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const {newUserValidation}  = require("../validation/userValidation");
+const registerUserValidation  = require("../validation/userValidation");
 
 const userSignup = async (req, res) => {
     try {
-        const { error } = newUserValidation(req.body);
+        const { error } = registerUserValidation.safeParse(req.body);
         if (error) return res.status(400).json({ message: error.errors[0].message });
 
         const { username, email, password } = req.body;

@@ -7,7 +7,13 @@ const petSchema = Schema({
     name: String,
     breed: String,
     color: String,
-    createdAt: { type: Date, default: Date.now},
+    updatedAt : { type: Date, default: Date.now},
+    createdAt: { type: Date, default: Date.now, immutable: true}
+});
+
+petSchema.pre('save', function(next) {
+    this.updatedAt = new Date();
+    next();
 });
 
 module.exports = mongoose.model('pets', petSchema)

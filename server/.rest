@@ -10,6 +10,6 @@ POST http://localhost:5050/api/v1/users/register
 Content-Type: application/json
 
 {
-"username" : "JackD27", "email" : "jdaviskid27@yahoo.com", "password" : "idk123"
+"username" : "Tyjack", "email" : "jdaviskid44@yahoo.com", "password" : "idk123"
 }
 
