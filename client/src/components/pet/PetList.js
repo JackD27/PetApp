@@ -11,7 +11,6 @@ import Skeleton from '@mui/material/Skeleton';
 function PetList(data, loading) {
 
     const pets = data.data;
-    console.log(loading);
 
   return (
     <TableContainer component={Paper}>

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import PetForm from '../pet/PetForm';
 import PetList from '../pet/PetList';
 import CircularProgress from '@mui/material/CircularProgress';
+import SnackbarNotif from '../utils/SnackbarNotif';
 
 
 function OwnerPage() {
@@ -13,6 +14,15 @@ function OwnerPage() {
   const [pets, setPets] = useState([]);
   const [owners, setOwners] = useState([])
   const [isLoading, setIsLoading] = useState(false);
+  const [errorData, setErrorData] = useState({open: false, message: '', severity: ''});
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setErrorData({open: false, severity: '', message: ''});
+  };
+
 
   useEffect(() => {
     // Define the function to make the Axios GET request
@@ -23,7 +33,7 @@ function OwnerPage() {
         setPets(response.data.pets);
         setOwners(response.data.owners);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        setErrorData({open: true, message: error.message, severity: 'error'})
       } finally {
         setIsLoading(false);
       }
@@ -34,9 +44,8 @@ function OwnerPage() {
     // Cleanup function to handle any necessary cleanup (e.g., canceling pending requests)
   }, []); // The empty dependency array means this effect runs once when the component mounts
 
-
-  console.log(pets)
   return (
+    <>
     <Container className='mt-5'>
     <Row>
     <Col>
@@ -47,6 +56,8 @@ function OwnerPage() {
     </Col>
     </Row>
     </Container>
+    <SnackbarNotif open={errorData.open} message={errorData.message} severity={errorData.severity} handleClose={handleClose} />
+    </>
   );
 }
 
