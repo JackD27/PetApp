@@ -7,9 +7,9 @@ const createPet = async (req, res) => {
         const { error } = petValidation.safeParse(req.body);
         if (error) return res.status(400).json({ message: error.errors[0].message });
 
-        const { name, species, breed, age, owner } = req.body;
+        const { name, species, breed, age, owner, color } = req.body;
 
-        const newPet = new petModel({ name, species, breed, age, owner });
+        const newPet = new petModel({ name, species, breed, age, owner, color });
 
         const ownerExists = await ownerModel.findById(owner);
         if (!ownerExists) return res.status(400).json({ message: "Owner does not exist." });
@@ -27,8 +27,9 @@ const createPet = async (req, res) => {
 
 const getPets = async (req, res) => {
     try {
-        const pets = await petModel.find().select("-__v");
-        res.status(200).json(pets);
+        const pets = await petModel.find().select("-__v").populate({path: "owner", select: ["-__v", "-pets", "-address", "-email", "-phoneNumber", "-updatedAt", "-createdAt"]});
+        const owners = await ownerModel.find().select(["-__v", "-pets", "-address", "-email", "-phoneNumber", "-updatedAt", "-createdAt"]);
+        res.status(200).json({pets: pets, owners: owners});
     }
     catch (err) {
         res.status(400).json({ message: err.message });

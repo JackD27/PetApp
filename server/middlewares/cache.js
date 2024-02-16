@@ -3,7 +3,7 @@ const caching = (req, res, next) => {
     const period = minutes * 60
 
     if (req.method === 'GET') {
-        res.set('Cache-Control', `public, max-age=${period}`)
+        res.set('Cache-Control', 'no-store')
     }else {
         res.set('Cache-Control', 'no-store')
     }

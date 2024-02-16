@@ -20,7 +20,7 @@ const createOwner = async (req, res) => {
 
 const getOwners = async (req, res) => {
     try {
-        const owners = await ownerModel.find().select("-__v");
+        const owners = await ownerModel.find().select("-__v").populate("pets");
         res.status(200).json(owners);
     }
     catch (err) {

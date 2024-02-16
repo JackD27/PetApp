@@ -3,11 +3,11 @@ GET http://localhost:5050/api/v1/users/get-users
 Accept: application/json
 
 ### 
-POST http://localhost:5050/api/v1/users/signup
+POST http://localhost:5050/api/v1/users/register
 Content-Type: application/json
 
 {
-"username" : "Tyjack", "email" : "jdaviskid44@yahoo.com", "password" : "idk123"
+"username" : "Myles", "email" : "Myles@yahoo.com", "password" : "idk123455q"
 }
 
 ### Owner API
@@ -24,7 +24,7 @@ POST http://localhost:5050/api/v1/owners/create
 Content-Type: application/json
 
 {
-"firstName" : "yooo", "lastName" : "Dgsgsave", "email" : "jdaviskid27@yahoo.com", "phoneNumber" : "123-456-7890"
+"firstName" : "reek", "lastName" : "tony", "email" : "jdarehkty@gmail.com", "phoneNumber" : "123-456-7890"
 }
 
 ###
@@ -40,7 +40,7 @@ POST http://localhost:5050/api/v1/pets/create
 Content-Type: application/json
 
 {
-"owner" : "65cbec61d7d9185978501cff", "name" : "Chua", "breed" : "poodle", "color" : "white"
+"owner" : "65cd0f91fce561c107ba836b", "name" : "min", "breed" : "lhasa", "color" : "black"
 }
 
 ###

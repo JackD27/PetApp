@@ -19,12 +19,6 @@ const ownerSchema = Schema({
     createdAt: { type: Date, default: Date.now, immutable: true}
 });
 
-ownerSchema.pre('findOneAndDelete', function(next) {
-    const ownerId = this.getQuery()["_id"];
-    mongoose.model('pets').deleteMany({ owner: ownerId });
-    next();
-});
-
 ownerSchema.pre('save', function(next) {
     this.updatedAt = new Date();
     next();
