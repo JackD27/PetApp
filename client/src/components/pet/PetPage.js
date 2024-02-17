@@ -3,13 +3,13 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import PetForm from '../pet/PetForm';
-import PetList from '../pet/PetList';
+import PetForm from './PetForm';
+import PetList from './PetList';
 import CircularProgress from '@mui/material/CircularProgress';
 import SnackbarNotif from '../utils/SnackbarNotif';
 
 
-function OwnerPage() {
+function PetPage() {
 
   const [pets, setPets] = useState([]);
   const [owners, setOwners] = useState([])
@@ -61,4 +61,4 @@ function OwnerPage() {
   );
 }
 
-export default OwnerPage;
+export default PetPage;
