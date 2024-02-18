@@ -1,6 +1,6 @@
 import PetPage from './components/pet/PetPage';
 import NavBar from './components/navbar/Navbar';
-import { BrowserRouter, Routes, Route} from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import OwnerPage from './components/owner/OwnerPage';
 import HomePage from './components/home/HomePage';
 import BarCode from './components/testing/Barcode';
