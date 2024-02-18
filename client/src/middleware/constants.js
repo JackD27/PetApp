@@ -1,4 +1,4 @@
-export const API_URL = 'http://localhost:5050/api/v1'
+export const API_URL = 'https://pet-app-ot3u.onrender.com/api/v1'
 
 export const ServiceInfo = [
     { name: "Grooming", description: "We will groom your pet to perfection!", price: 50.00},
