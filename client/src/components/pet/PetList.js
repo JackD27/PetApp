@@ -15,7 +15,7 @@ function PetList({data, onPetData}) {
 
     const deleteRowById = async (id) => {
       try {
-        const response = await axios.delete(API_URL+`/pets/delete/${id}`);
+        await axios.delete(API_URL+`/pets/delete/${id}`);
         const updatedPets = pets.filter((pet) => pet._id !== id);
         onPetData(updatedPets);
       } catch (error) {

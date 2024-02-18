@@ -15,7 +15,7 @@ function OwnerList({data, onOwnerData}) {
 
     const deleteRowById = async (id) => {
       try {
-        const response = await axios.delete(API_URL+`/owners/delete/${id}`);
+        await axios.delete(API_URL+`/owners/delete/${id}`);
         const updatedOwners = owners.filter((owner) => owner._id !== id);
 
         onOwnerData(updatedOwners);
