@@ -7,6 +7,7 @@ import PetForm from './PetForm';
 import PetList from './PetList';
 import CircularProgress from '@mui/material/CircularProgress';
 import SnackbarNotif from '../utils/SnackbarNotif';
+import { API_URL } from '../../middleware/constants';
 
 
 function PetPage() {
@@ -23,13 +24,22 @@ function PetPage() {
     setErrorData({open: false, severity: '', message: ''});
   };
 
+  const handlePetData = (data) => {
+    setPets(data)
+  }
+
+  const handleAddPet = (newPet) => {
+    // Update the state with the new todo
+    setPets([...pets, newPet]);
+  };
+
 
   useEffect(() => {
     // Define the function to make the Axios GET request
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get('http://localhost:5050/api/v1/pets/get-pets'); // Replace with your API endpoint
+        const response = await axios.get(API_URL+'/pets/get-pets'); // Replace with your API endpoint
         setPets(response.data.pets);
         setOwners(response.data.owners);
       } catch (error) {
@@ -49,10 +59,10 @@ function PetPage() {
     <Container className='mt-5'>
     <Row>
     <Col>
-    {isLoading ? <CircularProgress color="inherit"/> : <PetList data={pets}/>}
+    <PetForm data={owners} onAddPetData={handleAddPet}/>
     </Col>
     <Col>
-    <PetForm data={owners}/>
+    {isLoading ? <CircularProgress color="inherit"/> : <PetList data={pets} onPetData={handlePetData}/>}
     </Col>
     </Row>
     </Container>

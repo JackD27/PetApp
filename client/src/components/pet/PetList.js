@@ -6,11 +6,22 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import PetRow from './PetRow';
-import Skeleton from '@mui/material/Skeleton';
+import axios from 'axios';
+import { API_URL } from '../../middleware/constants';
 
-function PetList(data, loading) {
+function PetList({data, onPetData}) {
+    const pets = data;
 
-    const pets = data.data;
+
+    const deleteRowById = async (id) => {
+      try {
+        const response = await axios.delete(API_URL+`/pets/delete/${id}`);
+        const updatedPets = pets.filter((pet) => pet._id !== id);
+        onPetData(updatedPets);
+      } catch (error) {
+        console.error('Error deleting item:', error);
+      } 
+    };
 
   return (
     <TableContainer component={Paper}>
@@ -21,11 +32,13 @@ function PetList(data, loading) {
           <TableCell align='center'>Owner</TableCell>
           <TableCell>Breed</TableCell>
           <TableCell>Color</TableCell>
+          <TableCell></TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
         {pets.map((row) => (
-          <PetRow key={row._id} row={row} />
+          <PetRow key={row._id} row={row} onDelete={deleteRowById}/>
+          
         ))}
       </TableBody>
     </Table>

@@ -10,14 +10,15 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Button from '@mui/material/Button';
+import { useState } from 'react';
 
 
-function OwnerRow(props) {
-    const { row } = props;
-    const [open, setOpen] = React.useState(false);
-  
+function OwnerRow({row, onDelete}) {
+    const [open, setOpen] = useState(false);
+
     return (
-      <React.Fragment>
+      <>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
           <TableCell>
             { row.pets.length > 0 ?<IconButton
@@ -32,6 +33,9 @@ function OwnerRow(props) {
           <TableCell>{row.lastName}</TableCell>
           <TableCell>{row.email}</TableCell>
           <TableCell>{row.phoneNumber}</TableCell>
+          <TableCell>
+            <Button variant="contained"  size="small" color="error" onClick={() => onDelete(row._id)}>Delete</Button>
+          </TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -43,7 +47,7 @@ function OwnerRow(props) {
                 <Table size="small" aria-label="purchases">
                   <TableHead sx={{ fontColor: 'white'}}>
                     <TableRow>
-                      <TableCell>Name</TableCell>
+                      <TableCell>Pet Name</TableCell>
                       <TableCell>Breed</TableCell>
                       <TableCell>Color</TableCell>
                     </TableRow>
@@ -62,7 +66,7 @@ function OwnerRow(props) {
             </Collapse>
           </TableCell>
         </TableRow>
-      </React.Fragment>
+      </>
     );
 }
 

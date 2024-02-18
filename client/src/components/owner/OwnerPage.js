@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import OwnerList from './OwnerList';
 import CircularProgress from '@mui/material/CircularProgress';
 import SnackbarNotif from '../utils/SnackbarNotif';
+import { API_URL } from '../../middleware/constants';
 
 function OwnerPage() {
 
@@ -21,12 +22,21 @@ function OwnerPage() {
     setErrorData({open: false, severity: '', message: ''});
   };
 
+  const handleOwnerData = (data) => {
+    setData(data)
+  }
+
+  const handleAddOwner = (newOwner) => {
+    // Update the state with the new todo
+    setData([...data, newOwner]);
+  }
+
   useEffect(() => {
     // Define the function to make the Axios GET request
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get('http://localhost:5050/api/v1/owners/get-owners'); // Replace with your API endpoint
+        const response = await axios.get(API_URL+'/owners/get-owners'); // Replace with your API endpoint
         setData(response.data); // Update the state with the fetched data
       } catch (error) {
         setErrorData({open: true, message: error.message, severity: 'error'})
@@ -45,10 +55,10 @@ function OwnerPage() {
     <Container className='mt-5'>
     <Row>
     <Col>
-    {isLoading ? <CircularProgress color="inherit"/> : <OwnerList data={data}/>}
+    <OwnerForm onAddNewOwner={handleAddOwner}/>
     </Col>
     <Col>
-    <OwnerForm />
+    {isLoading ? <CircularProgress color="inherit"/> : <OwnerList data={data} onOwnerData={handleOwnerData}/>}
     </Col>
     </Row>
     </Container>

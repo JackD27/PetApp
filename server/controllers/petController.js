@@ -18,7 +18,8 @@ const createPet = async (req, res) => {
         ownerExists.pets.push(newPet);
         const updatedOwner = await ownerExists.save();
         const savedPet = await newPet.save();
-        res.status(201).json({ message: "Pet created successfully.", pet: savedPet, updatedOwner: updatedOwner});
+        const populatedPet = await savedPet.populate({path: "owner", select: ["-__v", "-pets", "-address", "-email", "-phoneNumber", "-updatedAt", "-createdAt"]});
+        res.status(201).json({ message: "Pet created successfully.", pet: populatedPet});
     }
     catch (err) {
         res.status(400).json({ message: err.message });
@@ -41,7 +42,7 @@ const deletePet = async (req, res) => {
         const pet = await petModel.findById(req.params.id);
         if (!pet) return res.status(404).json({ message: "Pet not found." });
 
-        await pet.remove();
+        await pet.deleteOne();
         res.json({ message: "Pet deleted successfully." });
     }
     catch (err) {

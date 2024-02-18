@@ -1,16 +1,16 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-function ServicesCard() {
+function ServicesCard({props}) {
   return (
-    <Card className='m-3'>
-      <Card.Header>Featured</Card.Header>
+    <Card className='m-3 h-600'>
+      <Card.Header>Pet App Services</Card.Header>
       <Card.Body>
-        <Card.Title>Special title treatment</Card.Title>
+        <Card.Title>{props.name}</Card.Title>
         <Card.Text>
-          With supporting text below as a natural lead-in to additional content.
+          {props.description}
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Button variant="success">Buy for ${props.price}.00</Button>
       </Card.Body>
     </Card>
   );

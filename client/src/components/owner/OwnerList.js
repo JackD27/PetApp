@@ -6,11 +6,23 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import OwnerRow from './OwnerRow';
+import axios from 'axios';
+import { API_URL } from '../../middleware/constants';
 
-function OwnerList(data) {
+function OwnerList({data, onOwnerData}) {
 
-    const owners = data.data;
-    console.log(owners);
+    const owners = data
+
+    const deleteRowById = async (id) => {
+      try {
+        const response = await axios.delete(API_URL+`/owners/delete/${id}`);
+        const updatedOwners = owners.filter((owner) => owner._id !== id);
+
+        onOwnerData(updatedOwners);
+      } catch (error) {
+        console.error('Error deleting item:', error);
+      } 
+    };
   
   return (
     <TableContainer component={Paper}>
@@ -22,11 +34,12 @@ function OwnerList(data) {
           <TableCell>Last Name</TableCell>
           <TableCell>Email</TableCell>
           <TableCell>Phone Number</TableCell>
+          <TableCell />
         </TableRow>
       </TableHead>
       <TableBody>
         {owners.map((row) => (
-          <OwnerRow key={row._id} row={row} />
+          <OwnerRow key={row._id} row={row} onDelete={deleteRowById} />
         ))}
       </TableBody>
     </Table>
