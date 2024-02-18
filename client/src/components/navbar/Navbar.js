@@ -12,8 +12,8 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
           <NavDropdown title="Admin" id="basic-nav-dropdown">
-            <NavDropdown.Item href="/owners">Owners</NavDropdown.Item>
-            <NavDropdown.Item href="/pets">Pets</NavDropdown.Item>
+            <NavDropdown.Item href="owners">Owners</NavDropdown.Item>
+            <NavDropdown.Item href="pets">Pets</NavDropdown.Item>
            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
